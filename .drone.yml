@@ -1,0 +1,12 @@
+cache:
+  mount:
+    - gocode
+
+build:
+  image: golang:1.7.1
+  commands:
+    - export GOPATH=$PWD/gocode
+    - bash -c "! gofmt -d . 2>&1 | tee /dev/stderr | read"
+    - go get -v -d -t ./...
+    - cd foo
+    - go test
